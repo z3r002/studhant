@@ -27,7 +27,7 @@ class _CreatePageState extends State<CreatePage> {
   @override
   void initState() {
     super.initState();
-    checkLoginStatus();
+    //checkLoginStatus();
   }
 
   checkLoginStatus() async {

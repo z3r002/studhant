@@ -214,7 +214,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   void performLogin(form) async {
     hideKeyboard();
     http.Response response = await http.post(
-        Uri.encodeFull('http://192.168.0.104:8000/api/v1/auth/users/'),
+        Uri.encodeFull('http://192.168.0.106/Reg.php'),
         headers: {
           'Accept': 'application/json'
         },
@@ -226,6 +226,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           'middle_name': _middleName,
           'phone': _phone
         });
+
     if (response.statusCode == 201) {
       storage.setItem('user', jsonEncode(response.body));
 
@@ -242,7 +243,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
    httpGet() async {
     http.Response response = await http.get(
-        Uri.encodeFull('http://192.168.0.104:8000/api/v1/auth/users/'),
+        Uri.encodeFull('http://192.168.0.106/Reg.php'),
         headers: {
           'Accept': 'application/json'
         });

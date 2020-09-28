@@ -81,7 +81,7 @@ class _AuthPageState extends State<AuthPage> {
                   new Padding(
                     padding: new EdgeInsets.only(top: 25.0),
                     child: new MaterialButton(
-                      onPressed: submit,
+                      onPressed: fucktheAuth,
                       color: Theme.of(context).accentColor,
                       height: 50.0,
                       minWidth: 150.0,
