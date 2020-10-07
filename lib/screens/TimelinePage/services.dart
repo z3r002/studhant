@@ -1,14 +1,13 @@
 import 'dart:convert';
+import 'package:digitalpendal/constants.dart';
 import 'package:http/http.dart' as http;
 
 import 'album.dart';
 
 class Services {
-  static const String url = "http://192.168.0.104:8000/api/v1/jobs/all/";
-
   static Future<List<Album>> getPhotos() async {
     try {
-      http.Response response = await http.get(Uri.encodeFull(url));
+      http.Response response = await http.get(Uri.encodeFull(url + '/Data.php'));
       if (response.statusCode == 200) {
         List<Album> list = parsePhotos(response.body);
         return list;

@@ -1,8 +1,9 @@
 import 'dart:convert';
+import 'package:digitalpendal/constants.dart';
+import 'package:digitalpendal/screens/Widgets/NavBar.dart';
+import 'package:digitalpendal/screens/Widgets/inputsW.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:localstorage/localstorage.dart';
 import 'package:http/http.dart' as http;
-import 'package:digitalpendal/main.dart';
 import 'package:digitalpendal/screens/Authentication/RegistrationPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,22 +16,23 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends State<AuthPage> {
   String _email;
   String _password;
-  final LocalStorage storage = new LocalStorage('some_key');
+
   final _sizeTextBlack = const TextStyle(fontSize: 20.0, color: Colors.black);
   final _sizeTextWhite = const TextStyle(fontSize: 20.0, color: Colors.white);
+
   final formKey = new GlobalKey<FormState>();
   BuildContext _context;
 
   @override
   Widget build(BuildContext context) {
     _context = context;
-    return new MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: new Scaffold(
-        body: new Center(
-          child: new Form(
+      home: Scaffold(
+        body: Center(
+          child: Form(
               key: formKey,
-              child: new Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   new Container(
@@ -81,7 +83,7 @@ class _AuthPageState extends State<AuthPage> {
                   new Padding(
                     padding: new EdgeInsets.only(top: 25.0),
                     child: new MaterialButton(
-                      onPressed: fucktheAuth,
+                      onPressed: submit,
                       color: Theme.of(context).accentColor,
                       height: 50.0,
                       minWidth: 150.0,
@@ -131,16 +133,14 @@ class _AuthPageState extends State<AuthPage> {
     final storage = new FlutterSecureStorage();
     Map data = {'email': _email, 'password': _password};
     var jsonResponse;
-    var response = await http.post(
-        "http://192.168.0.104:8000/api/v1/auth_token/token/login/",
-        body: data);
+    var response = await http.post(url + '/Auth.php', body: data);
+    print(response);
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
       print(jsonResponse);
       if (jsonResponse != null) {
         setState(() {});
-        await storage.write(
-            key: "auth_token", value: jsonResponse['auth_token']);
+        await storage.write(key: "token", value: jsonResponse['token']);
         Navigator.of(_context).pushAndRemoveUntil(
             MaterialPageRoute(
                 builder: (BuildContext context) => MyBottomNavigationBar()),
@@ -151,19 +151,14 @@ class _AuthPageState extends State<AuthPage> {
       print(response.body);
     }
     httpGet();
-
   }
 
   httpGet() async {
-    http.Response response = await http.get(
-        Uri.encodeFull('http://192.168.0.104:8000/api/v1/auth/users/'),
-        headers: {
-          'Accept': 'application/json'
-        });
+    http.Response response = await http.get(Uri.encodeFull(url + '/Auth.php'),
+        headers: {'Accept': 'application/json'});
     print("responce status: ${response.statusCode}");
     print("responce body: ${response.body}");
   }
-
 
   void hideKeyboard() {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
@@ -181,7 +176,5 @@ class _AuthPageState extends State<AuthPage> {
     hideKeyboard();
     Navigator.push(_context,
         new MaterialPageRoute(builder: (context) => new RegistrationPage()));
-
-
   }
 }

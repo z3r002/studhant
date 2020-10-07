@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'album.dart';
@@ -26,11 +28,9 @@ class AlbumCell extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Hero(
-                    tag: "image${album.id}",
-                    child: FadeInImage.assetNetwork(
-                      placeholder: "images/noimage-md.png",
-                      //image: album.thumbnailUrl,
-                      image: "images/noimage-md.png",
+                    tag: "${album.id}",
+                    child: Image.asset(
+                      'images/noimage-md.png',
                       width: 100,
                       height: 100,
                     ),
@@ -64,7 +64,7 @@ class AlbumCell extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    "Найдено: " + album.find + "/" + album.count_people,
+                    "Найдено: " + '0' + "/" + album.count_people,
                     softWrap: false,
                     style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
                   )
@@ -75,5 +75,6 @@ class AlbumCell extends StatelessWidget {
         ),
       ),
     );
+
   }
 }

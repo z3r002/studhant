@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:digitalpendal/constants.dart';
+import 'package:digitalpendal/screens/Widgets/NavBar.dart';
 import 'package:http/http.dart' as http;
 import 'package:localstorage/localstorage.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
   String _middleName;
   String _phone;
   int id;
-  final LocalStorage storage = new LocalStorage('some_key');
   final _sizeTextBlack = const TextStyle(fontSize: 20.0, color: Colors.black);
   final _sizeTextWhite = const TextStyle(fontSize: 20.0, color: Colors.white);
   final _sizeTextGrey = const TextStyle(fontSize: 20.0, color: Colors.grey);
@@ -32,27 +33,27 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     _context = context;
-    return new MaterialApp(
+    return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: new Scaffold(
+        home: Scaffold(
           resizeToAvoidBottomPadding: false,
-          body: new Center(
+          body: Center(
             child: SingleChildScrollView(
-              child: new Form(
+              child: Form(
                   key: formKey,
-                  child: new Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new Padding(padding: EdgeInsets.only(top: 20.0)),
-                      new Container(
-                        child: new TextFormField(
+                      Padding(padding: EdgeInsets.only(top: 20.0)),
+                      Container(
+                        child: TextFormField(
                           //decoration: new InputDecoration(labelText: "Почта"),
-                          decoration: new InputDecoration(
+                          decoration: InputDecoration(
                             labelText: "Почта",
                             fillColor: Colors.white,
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(),
                             ),
                             //fillColor: Colors.green
                           ),
@@ -61,26 +62,25 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           style: _sizeTextBlack,
                           onSaved: (val) => _email = val,
                           validator: (val) =>
-                          !val.contains("@") ? 'Некорректный email' : null,
+                              !val.contains("@") ? 'Некорректный email' : null,
                         ),
                         width: 340.0,
                         height: 50,
                       ),
-                      new Container(
-                        child: new TextFormField(
-                          decoration: new InputDecoration(
+                      Container(
+                        child: TextFormField(
+                          decoration: InputDecoration(
                             labelText: "Пароль",
                             fillColor: Colors.white,
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(),
                             ),
                             //fillColor: Colors.green
                           ),
                           obscureText: true,
                           maxLines: 1,
-                          validator: (val) =>
-                          val.length < 6
+                          validator: (val) => val.length < 6
                               ? 'Пароль меньше 6 символов.'
                               : null,
                           onSaved: (val) => _password = val,
@@ -88,110 +88,108 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                         width: 340.0,
                         height: 50,
-                        margin: new EdgeInsets.only(top: 20.0),
+                        margin: EdgeInsets.only(top: 20.0),
                       ),
-                      new Container(
-                        child: new TextFormField(
-                          decoration: new InputDecoration(
+                      Container(
+                        child: TextFormField(
+                          decoration: InputDecoration(
                             labelText: "Фамилия",
                             fillColor: Colors.white,
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(),
                             ),
                             //fillColor: Colors.green
                           ),
                           maxLines: 1,
                           validator: (val) =>
-                          val.length < 2 ? 'Введите фамилию' : null,
+                              val.length < 2 ? 'Введите фамилию' : null,
                           onSaved: (val) => _lastName = val,
                           style: _sizeTextBlack,
                         ),
                         width: 340.0,
                         height: 50,
-                        margin: new EdgeInsets.only(top: 20.0),
+                        margin: EdgeInsets.only(top: 20.0),
                       ),
-                      new Container(
-                        child: new TextFormField(
-                          decoration: new InputDecoration(
+                      Container(
+                        child: TextFormField(
+                          decoration: InputDecoration(
                             labelText: "Имя",
                             fillColor: Colors.white,
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(),
                             ),
                             //fillColor: Colors.green
                           ),
                           maxLines: 1,
                           validator: (val) =>
-                          val.length < 2 ? 'Введите имя' : null,
+                              val.length < 2 ? 'Введите имя' : null,
                           onSaved: (val) => _firstName = val,
                           style: _sizeTextBlack,
                         ),
                         width: 340.0,
                         height: 50,
-                        margin: new EdgeInsets.only(top: 20.0),
+                        margin: EdgeInsets.only(top: 20.0),
                       ),
-                      new Container(
-                        child: new TextFormField(
-                          decoration: new InputDecoration(
+                      Container(
+                        child: TextFormField(
+                          decoration: InputDecoration(
                             labelText: "Отчество",
                             fillColor: Colors.white,
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(),
                             ),
                             //fillColor: Colors.green
                           ),
                           maxLines: 1,
                           validator: (val) =>
-                          val.length < 2 ? 'Введите отчество' : null,
+                              val.length < 2 ? 'Введите отчество' : null,
                           onSaved: (val) => _middleName = val,
                           style: _sizeTextBlack,
                         ),
                         width: 340.0,
                         height: 50,
-                        margin: new EdgeInsets.only(top: 20.0),
+                        margin: EdgeInsets.only(top: 20.0),
                       ),
-                      new Container(
-                        child: new TextFormField(
-                          decoration: new InputDecoration(
+                      Container(
+                        child: TextFormField(
+                          decoration: InputDecoration(
                             labelText: "Телефон",
                             fillColor: Colors.white,
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(),
                             ),
                             //fillColor: Colors.green
                           ),
                           maxLines: 1,
                           validator: (val) =>
-                          val.length < 2 ? 'Введите телефон' : null,
+                              val.length < 2 ? 'Введите телефон' : null,
                           onSaved: (val) => _phone = val,
                           style: _sizeTextBlack,
                         ),
                         width: 340.0,
                         height: 50,
-                        margin: new EdgeInsets.only(top: 20.0),
+                        margin: EdgeInsets.only(top: 20.0),
                       ),
-                      new Padding(padding: new EdgeInsets.only(top: 50.0)),
-                      new MaterialButton(
+                      Padding(padding: EdgeInsets.only(top: 50.0)),
+                      MaterialButton(
                         onPressed: submit,
-                        color: Theme
-                            .of(context)
-                            .accentColor,
+                        color: Theme.of(context).accentColor,
                         height: 50.0,
                         minWidth: 150.0,
-                        child: new Text(
+                        child: Text(
                           "Зарегистрироваться",
                           style: _sizeTextWhite,
                         ),
                       ),
-                      new MaterialButton(
+                      MaterialButton(
                         onPressed: backToLogin,
                         height: 30.0,
                         minWidth: 150.0,
-                        child: new Text(
+                        child: Text(
                           "У меня уже есть аккаунт",
                           style: _sizeTextGrey,
                         ),
@@ -213,22 +211,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   void performLogin(form) async {
     hideKeyboard();
-    http.Response response = await http.post(
-        Uri.encodeFull('http://192.168.0.106/Reg.php'),
-        headers: {
-          'Accept': 'application/json'
-        },
-        body: {
-          'email': _email,
-          'password': _password,
-          'first_name': _firstName,
-          'last_name': _lastName,
-          'middle_name': _middleName,
-          'phone': _phone
-        });
+    http.Response response =
+        await http.post(Uri.encodeFull(url + '/Reg.php'), headers: {
+      'Accept': 'application/json'
+    }, body: {
+      'email': _email,
+      'password': _password,
+      'first_name': _firstName,
+      'last_name': _lastName,
+      'middle_name': _middleName,
+      'phone': _phone
+    });
 
     if (response.statusCode == 201) {
-      storage.setItem('user', jsonEncode(response.body));
+    //  storage.setItem('token', jsonEncode(response.body));
 
       Navigator.push(
           _context,
@@ -238,17 +234,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
     } else {
       print(response.body);
     }
-    httpGet();
-  }
-
-   httpGet() async {
-    http.Response response = await http.get(
-        Uri.encodeFull('http://192.168.0.106/Reg.php'),
-        headers: {
-          'Accept': 'application/json'
-        });
-    print("responce status: ${response.statusCode}");
-    print("responce body: ${response.body}");
   }
 
 
@@ -257,9 +242,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
         _context, new MaterialPageRoute(builder: (context) => AuthPage()));
   }
 }
-  void hideKeyboard() {
-    SystemChannels.textInput.invokeMethod('TextInput.hide');
-  }
+
+void hideKeyboard() {
+  SystemChannels.textInput.invokeMethod('TextInput.hide');
+}
 //  _showSnackBar(){
 //    final snackBar = new SnackBar(
 //        content: new Text("Новый пользователь создан!"));

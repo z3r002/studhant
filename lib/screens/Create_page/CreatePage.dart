@@ -1,5 +1,7 @@
+import 'package:digitalpendal/constants.dart';
 import 'package:digitalpendal/main.dart';
 import 'package:digitalpendal/screens/Authentication/AuthPage.dart';
+import 'package:digitalpendal/screens/Widgets/NavBar.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -22,21 +24,24 @@ class _CreatePageState extends State<CreatePage> {
 
   final _sizeTextBlack = const TextStyle(fontSize: 20.0, color: Colors.black);
   final _sizeTextWhite = const TextStyle(fontSize: 20.0, color: Colors.white);
-  final storage = FlutterSecureStorage();
+  final  storage = FlutterSecureStorage();
+
+  EdgeInsets pad = EdgeInsets.only(top: 20.0);
 
   @override
   void initState() {
     super.initState();
-    //checkLoginStatus();
+    checkLoginStatus();
   }
 
   checkLoginStatus() async {
-    value = await storage.read(key: 'auth_token');
+    value = await storage.read(key: 'token');
     if (value == null) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => AuthPage()),
           (Route<dynamic> route) => false);
     }
+    print('THIS FUCKING TOKEN ' +value);
   }
 
   BuildContext _context;
@@ -44,26 +49,27 @@ class _CreatePageState extends State<CreatePage> {
   @override
   Widget build(BuildContext context) {
     _context = context;
-    return new MaterialApp(
+    return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: new Scaffold(
+        home: Scaffold(
           resizeToAvoidBottomPadding: false,
-          body: new Center(
+          body:  Center(
             child: SingleChildScrollView(
-              child: new Form(
+              child: Form(
                   key: formKey,
-                  child: new Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new Padding(padding: EdgeInsets.only(top: 20.0)),
-                      new Container(
-                        child: new TextFormField(
-                          decoration: new InputDecoration(
+                       Padding(
+                           padding: pad),
+                       Container(
+                        child: TextFormField(
+                          decoration: InputDecoration(
                             labelText: "Название работы",
                             fillColor: Colors.white,
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(),
                             ),
                             //fillColor: Colors.green
                           ),
@@ -75,18 +81,17 @@ class _CreatePageState extends State<CreatePage> {
                         ),
                         width: 340.0,
                         height: 50,
-                        margin: new EdgeInsets.only(top: 20.0),
+                        margin:  pad,
                       ),
-                      new Container(
-                        child: new TextFormField(
-                          decoration: new InputDecoration(
+                      Container(
+                        child: TextFormField(
+                          decoration: InputDecoration(
                             labelText: "Сколько людей нужно",
                             fillColor: Colors.white,
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(),
                             ),
-                            //fillColor: Colors.green
                           ),
                           maxLines: 1,
                           validator: (val) =>
@@ -96,16 +101,16 @@ class _CreatePageState extends State<CreatePage> {
                         ),
                         width: 340.0,
                         height: 50,
-                        margin: new EdgeInsets.only(top: 20.0),
+                        margin: pad,
                       ),
-                      new Container(
-                        child: new TextFormField(
-                          decoration: new InputDecoration(
+                      Container(
+                        child: TextFormField(
+                          decoration: InputDecoration(
                             labelText: "Введите сумму",
                             fillColor: Colors.white,
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(),
                             ),
                             //fillColor: Colors.green
                           ),
@@ -117,37 +122,37 @@ class _CreatePageState extends State<CreatePage> {
                         ),
                         width: 340.0,
                         height: 50,
-                        margin: new EdgeInsets.only(top: 20.0),
+                        margin: EdgeInsets.only(top: 20.0),
                       ),
-                      new Container(
-                        child: new TextFormField(
-                          decoration: new InputDecoration(
+                       Container(
+                        child: TextFormField(
+                          decoration: InputDecoration(
                             labelText: "Срок исполнения",
                             fillColor: Colors.white,
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(),
                             ),
                             //fillColor: Colors.green
                           ),
                           maxLines: 1,
                           validator: (val) =>
-                              val.length < 0 ? 'Введиnt срок выполнения' : null,
+                              val.length < 0 ? 'Введите срок выполнения' : null,
                           onSaved: (val) => _executePeriod = val,
                           style: _sizeTextBlack,
                         ),
                         width: 340.0,
                         height: 50,
-                        margin: new EdgeInsets.only(top: 20.0),
+                        margin: pad,
                       ),
-                      new Container(
-                        child: new TextFormField(
-                          decoration: new InputDecoration(
+                      Container(
+                        child: TextFormField(
+                          decoration: InputDecoration(
                             labelText: "краткое описание",
                             fillColor: Colors.white,
-                            border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: new BorderSide(),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide(),
                             ),
                             //fillColor: Colors.green
                           ),
@@ -159,15 +164,15 @@ class _CreatePageState extends State<CreatePage> {
                         ),
                         width: 340.0,
                         height: 50,
-                        margin: new EdgeInsets.only(top: 20.0),
+                        margin: pad,
                       ),
-                      new Padding(padding: new EdgeInsets.only(top: 50.0)),
-                      new MaterialButton(
+                      Padding(padding: EdgeInsets.only(top: 50.0)),
+                      MaterialButton(
                         onPressed: submit,
-                        color: Theme.of(context).accentColor,
+                        color: Colors.black,
                         height: 50.0,
                         minWidth: 150.0,
-                        child: new Text(
+                        child: Text(
                           "Создать",
                           style: _sizeTextWhite,
                         ),
@@ -189,29 +194,29 @@ class _CreatePageState extends State<CreatePage> {
 
   void performLogin(form) async {
     hideKeyboard();
-    String token = "Token " + value;
 
     http.Response response = await http.post(
-        Uri.encodeFull('http://192.168.0.104:8000/api/v1/jobs/job/create/'),
+        Uri.encodeFull(url + '/Data.php'),
         headers: {
           'Accept': 'application/json',
           //'Authorization': 'Token 82b6a5bcf7ad37f45de2a3e89bfea52f23bfb87a'//admin worked hardcore
-          'Authorization': token
         },
         body: {
           'name': _name,
+          'token': value,
           'description': _description,
           'count_people': _countPeople,
           'cost': _cost,
           'execute_period': _executePeriod
         });
+    print(response.statusCode);
     if (response.statusCode == 201) {
-      //storage.setItem('user', jsonEncode(response.body));
+      //storage.setItem('token', jsonEncode(response.body));
       hideKeyboard();
       Navigator.push(
           _context,
-          new MaterialPageRoute(
-              builder: (context) => new MyBottomNavigationBar()));
+          MaterialPageRoute(
+              builder: (context) => MyBottomNavigationBar()));
     }
   }
 
