@@ -211,7 +211,6 @@ class _CreatePageState extends State<CreatePage> {
         });
     print(response.statusCode);
     if (response.statusCode == 201) {
-      //storage.setItem('token', jsonEncode(response.body));
       hideKeyboard();
       Navigator.push(
           _context,

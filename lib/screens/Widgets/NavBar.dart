@@ -1,10 +1,12 @@
 import 'package:digitalpendal/screens/Authentication/AuthPage.dart';
 import 'package:digitalpendal/screens/Create_page/CreatePage.dart';
+import 'package:digitalpendal/screens/ProfilePage/ProfilePage.dart';
+import 'package:digitalpendal/screens/ProfilePage/ProfilePage.dart';
+import 'package:digitalpendal/screens/ProfilePage/ProfilePage.dart';
 import 'package:digitalpendal/screens/TimelinePage/TaskPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../Profile_Page.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   @override
@@ -25,12 +27,12 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     if (value == null) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => AuthPage()),
-              (Route<dynamic> route) => false);
+          (Route<dynamic> route) => false);
     }
   }
 
   int _currentIndex = 0;
-  final List<Widget> _children = [TaskPage(), CreatePage(), Profile_Page()];
+  final List<Widget> _children = [TaskPage(), CreatePage(), Profile()];
 
   void onTappedBar(int index) {
     setState(() {

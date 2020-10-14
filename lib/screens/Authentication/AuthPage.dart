@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:digitalpendal/constants.dart';
 import 'package:digitalpendal/screens/Widgets/NavBar.dart';
-import 'package:digitalpendal/screens/Widgets/inputsW.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:digitalpendal/screens/Authentication/RegistrationPage.dart';
@@ -35,14 +34,14 @@ class _AuthPageState extends State<AuthPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  new Container(
-                    child: new TextFormField(
-                      decoration: new InputDecoration(
+                   Container(
+                    child:  TextFormField(
+                      decoration:  InputDecoration(
                         labelText: "Логин",
                         fillColor: Colors.white,
-                        border: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(25.0),
-                          borderSide: new BorderSide(),
+                        border:  OutlineInputBorder(
+                          borderRadius:  BorderRadius.circular(25.0),
+                          borderSide:  BorderSide(),
                         ),
                         //fillColor: Colors.green
                       ),
@@ -55,17 +54,17 @@ class _AuthPageState extends State<AuthPage> {
                     ),
                     width: 340.0,
                     height: 50,
-                    padding: new EdgeInsets.only(top: 10.0),
+                    padding:  EdgeInsets.only(top: 10.0),
                   ),
-                  new Padding(padding: new EdgeInsets.only(top: 25.0)),
-                  new Container(
-                    child: new TextFormField(
-                      decoration: new InputDecoration(
+                   Padding(padding:  EdgeInsets.only(top: 25.0)),
+                   Container(
+                    child:  TextFormField(
+                      decoration:  InputDecoration(
                         labelText: "Пароль",
                         fillColor: Colors.white,
-                        border: new OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(25.0),
-                          borderSide: new BorderSide(),
+                        border:  OutlineInputBorder(
+                          borderRadius:  BorderRadius.circular(25.0),
+                          borderSide:  BorderSide(),
                         ),
                         //fillColor: Colors.green
                       ),
@@ -78,29 +77,29 @@ class _AuthPageState extends State<AuthPage> {
                     ),
                     width: 340.0,
                     height: 50,
-                    padding: new EdgeInsets.only(top: 10.0),
+                    padding:  EdgeInsets.only(top: 10.0),
                   ),
-                  new Padding(
-                    padding: new EdgeInsets.only(top: 25.0),
-                    child: new MaterialButton(
+                   Padding(
+                    padding:  EdgeInsets.only(top: 25.0),
+                    child:  MaterialButton(
                       onPressed: submit,
                       color: Theme.of(context).accentColor,
                       height: 50.0,
                       minWidth: 150.0,
-                      child: new Text(
+                      child:  Text(
                         "Войти",
                         style: _sizeTextWhite,
                       ),
                     ),
                   ),
-                  new Padding(
-                    padding: new EdgeInsets.only(top: 25.0),
-                    child: new MaterialButton(
+                   Padding(
+                    padding:  EdgeInsets.only(top: 25.0),
+                    child:  MaterialButton(
                       onPressed: submitForm,
                       color: Colors.white,
                       height: 50.0,
                       minWidth: 150.0,
-                      child: new Text(
+                      child:  Text(
                         "Зарегистрироваться",
                         style: _sizeTextBlack,
                       ),
@@ -130,7 +129,7 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   signIn() async {
-    final storage = new FlutterSecureStorage();
+    final storage =  FlutterSecureStorage();
     Map data = {'email': _email, 'password': _password};
     var jsonResponse;
     var response = await http.post(url + '/Auth.php', body: data);
@@ -164,17 +163,9 @@ class _AuthPageState extends State<AuthPage> {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
   }
 
-  void fucktheAuth() {
-    hideKeyboard();
-    Navigator.push(
-        _context,
-        new MaterialPageRoute(
-            builder: (context) => new MyBottomNavigationBar()));
-  }
-
   void submitForm() {
     hideKeyboard();
     Navigator.push(_context,
-        new MaterialPageRoute(builder: (context) => new RegistrationPage()));
+         MaterialPageRoute(builder: (context) =>  RegistrationPage()));
   }
 }

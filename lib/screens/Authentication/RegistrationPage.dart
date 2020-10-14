@@ -1,11 +1,8 @@
-import 'dart:convert';
 import 'package:digitalpendal/constants.dart';
 import 'package:digitalpendal/screens/Widgets/NavBar.dart';
 import 'package:http/http.dart' as http;
-import 'package:localstorage/localstorage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../main.dart';
 import 'AuthPage.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -224,8 +221,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
     });
 
     if (response.statusCode == 201) {
-    //  storage.setItem('token', jsonEncode(response.body));
-
       Navigator.push(
           _context,
           new MaterialPageRoute(

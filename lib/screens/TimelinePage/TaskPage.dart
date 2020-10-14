@@ -51,19 +51,7 @@ class TaskPageState extends State<TaskPage> {
       ),
     );
   }
-  // goToDetails() {
-  //   Navigator.push(
-  //
-  //     context,
-  //     MaterialPageRoute(
-  //
-  //       fullscreenDialog: true,
-  //       builder: (BuildContext context) => Details(
-  //
-  //       ),
-  //     ),
-  //   );
-  // }
+
 
   circularProgress() {
     return Center(

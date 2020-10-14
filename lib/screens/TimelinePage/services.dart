@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:digitalpendal/constants.dart';
 import 'package:http/http.dart' as http;
-
 import 'album.dart';
 
 class Services {
+
   static Future<List<Album>> getPhotos() async {
     try {
       http.Response response = await http.get(Uri.encodeFull(url + '/Data.php'));
