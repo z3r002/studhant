@@ -149,15 +149,10 @@ class _AuthPageState extends State<AuthPage> {
       setState(() {});
       print(response.body);
     }
-    httpGet();
+
   }
 
-  httpGet() async {
-    http.Response response = await http.get(Uri.encodeFull(url + '/Auth.php'),
-        headers: {'Accept': 'application/json'});
-    print("responce status: ${response.statusCode}");
-    print("responce body: ${response.body}");
-  }
+
 
   void hideKeyboard() {
     SystemChannels.textInput.invokeMethod('TextInput.hide');

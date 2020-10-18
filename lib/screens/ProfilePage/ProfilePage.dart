@@ -26,20 +26,70 @@ class _ProfileState extends State<Profile> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Container(
-              margin: EdgeInsets.only(top: 24, left: 12,),
+              margin: EdgeInsets.only(
+                top: 30,
+                left: 12,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-
-                  Text(
-                    snapshot.data.first_name + '  ' + snapshot.data.last_name,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        snapshot.data.first_name +
+                            '  ' +
+                            snapshot.data.last_name,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 25),
+                      ),
+                      Spacer(),
+                      Container(
+                        margin: EdgeInsets.only(right: 20, top: 20),
+                        child: ClipOval(
+                          child: Image.asset(
+                            "images/profile.png",
+                            height: 130,
+                            width: 130,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-
                   Text(
-                    'Номер профиля\n' + snapshot.data.id,
-                    style: TextStyle(fontSize: 20),
-                  )
+                    'Номер профиля\n' + 'id ' + snapshot.data.id,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.body1,
+                      children: [
+                        WidgetSpan(
+                            child: Padding(
+                          padding: const EdgeInsets.only(right: 12, top: 12),
+                          child: Icon(Icons.email),
+                        )),
+                        TextSpan(
+                            text: snapshot.data.email,
+                            style: TextStyle(fontSize: 20)),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.body1,
+                      children: [
+                        WidgetSpan(
+                            child: Padding(
+                          padding: const EdgeInsets.only(right: 12, top: 12),
+                          child: Icon(Icons.phone),
+                        )),
+                        TextSpan(
+                            text: snapshot.data.phone,
+                            style: TextStyle(fontSize: 20)),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             );
@@ -47,7 +97,12 @@ class _ProfileState extends State<Profile> {
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }
-          return CircularProgressIndicator();
+          return circularProgress();
         });
+  }
+  circularProgress() {
+    return Center(
+      child: const CircularProgressIndicator(),
+    );
   }
 }

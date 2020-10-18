@@ -15,7 +15,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
   String _password;
   String _lastName;
   String _firstName;
-  String _middleName;
   String _phone;
   int id;
   final _sizeTextBlack = const TextStyle(fontSize: 20.0, color: Colors.black);
@@ -129,27 +128,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         height: 50,
                         margin: EdgeInsets.only(top: 20.0),
                       ),
-                      Container(
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            labelText: "Отчество",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                              borderSide: BorderSide(),
-                            ),
-                            //fillColor: Colors.green
-                          ),
-                          maxLines: 1,
-                          validator: (val) =>
-                              val.length < 2 ? 'Введите отчество' : null,
-                          onSaved: (val) => _middleName = val,
-                          style: _sizeTextBlack,
-                        ),
-                        width: 340.0,
-                        height: 50,
-                        margin: EdgeInsets.only(top: 20.0),
-                      ),
+
                       Container(
                         child: TextFormField(
                           decoration: InputDecoration(
@@ -216,7 +195,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
       'password': _password,
       'first_name': _firstName,
       'last_name': _lastName,
-      'middle_name': _middleName,
       'phone': _phone
     });
 
