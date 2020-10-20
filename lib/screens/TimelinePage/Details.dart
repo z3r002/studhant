@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../../constants.dart';
 import 'album.dart';
+import 'package:http/http.dart' as http;
+
 
 class Details extends StatefulWidget {
   Details({@required this.curAlbum});
@@ -11,6 +15,9 @@ class Details extends StatefulWidget {
 }
 
 class GridDetailsState extends State<Details> {
+  final  storage = FlutterSecureStorage();
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,11 +35,7 @@ class GridDetailsState extends State<Details> {
                 child: Image.asset(
                   'images/noimage-md.png',
                 ),
-                // widget.curAlbum.id,
-                // child: FadeInImage.assetNetwork(
-                //     placeholder: "images/noimage-md.png",
-                //     //image: widget.curAlbum.,
-                //     image: "images/noimage-md.png"),
+
               ),
               Row(
                 children: <Widget>[
@@ -106,19 +109,22 @@ class GridDetailsState extends State<Details> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => accept(),
               ),
               SizedBox(
                 height: 30.0,
               ),
-              OutlineButton(
-                child: Icon(Icons.close),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
+              // OutlineButton(
+              //   child: Icon(Icons.close),
+              //   onPressed: () => Navigator.of(context).pop(),
+              // ),
             ],
           ),
         ),
       ),
     );
+  }
+  accept(){
+
   }
 }

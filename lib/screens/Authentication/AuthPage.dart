@@ -14,7 +14,7 @@ class AuthPage extends StatefulWidget {
   @override
   _AuthPageState createState() => _AuthPageState();
 }
-class _LoginPageState extends State<AuthPage> {
+class _AuthPageState extends State<AuthPage> {
   final GlobalKey<FormState> _key = GlobalKey();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -211,7 +211,7 @@ class _LoginPageState extends State<AuthPage> {
         Text('Не имеете аккаунта?',
             style: TextStyle(color: Colors.grey)),
         FlatButton(
-          child: Text('Зарегистрироваться',
+          child: Text('Создать аккаунт',
               style: TextStyle(
                   color: Colors.black87,
                   //decoration: TextDecoration.underline,
@@ -219,7 +219,6 @@ class _LoginPageState extends State<AuthPage> {
                   fontWeight: FontWeight.bold)),
           onPressed: () {
             Reg();
-
           },
         ),
       ],

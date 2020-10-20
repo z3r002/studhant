@@ -1,5 +1,4 @@
 import 'package:digitalpendal/constants.dart';
-import 'package:digitalpendal/main.dart';
 import 'package:digitalpendal/screens/Authentication/AuthPage.dart';
 import 'package:digitalpendal/screens/Widgets/NavBar.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -197,10 +196,6 @@ class _CreatePageState extends State<CreatePage> {
 
     http.Response response = await http.post(
         Uri.encodeFull(url + '/Data.php'),
-        headers: {
-          'Accept': 'application/json',
-          //'Authorization': 'Token 82b6a5bcf7ad37f45de2a3e89bfea52f23bfb87a'//admin worked hardcore
-        },
         body: {
           'name': _name,
           'token': value,

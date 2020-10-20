@@ -23,14 +23,11 @@ class TaskPageState extends State<TaskPage> {
         children: snapshot.data.map(
           (album) {
             return GestureDetector(
-
               child: GridTile(
                 child: AlbumCell(album),
               ),
               onTap: () {
-
-               goToDetails(context, album);
-                //goToDetails();
+                goToDetails(context, album);
               },
             );
           },
@@ -38,12 +35,11 @@ class TaskPageState extends State<TaskPage> {
       ),
     );
   }
+
   goToDetails(BuildContext context, Album album) {
     Navigator.push(
-
       context,
       MaterialPageRoute(
-
         fullscreenDialog: true,
         builder: (BuildContext context) => Details(
           curAlbum: album,
@@ -51,7 +47,6 @@ class TaskPageState extends State<TaskPage> {
       ),
     );
   }
-
 
   circularProgress() {
     return Center(

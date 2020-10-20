@@ -1,5 +1,7 @@
+import 'package:digitalpendal/screens/Authentication/AuthPage.dart';
 import 'package:digitalpendal/screens/ProfilePage/models.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'services_pp.dart';
 
@@ -90,6 +92,18 @@ class _ProfileState extends State<Profile> {
                       ],
                     ),
                   ),
+                  FlatButton(
+                    child: Text('Выйти',
+                        style: TextStyle(
+                            color: Colors.black87,
+                            //decoration: TextDecoration.underline,
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold)),
+                    onPressed: () {
+                      logout();
+
+                    },
+                  ),
                 ],
               ),
             );
@@ -99,6 +113,13 @@ class _ProfileState extends State<Profile> {
           }
           return circularProgress();
         });
+  }
+  logout(){
+    final storage = FlutterSecureStorage();
+    var value = storage.delete(key: 'token');
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) =>  AuthPage()));
+
   }
   circularProgress() {
     return Center(
