@@ -1,8 +1,6 @@
 import 'package:digitalpendal/screens/Authentication/AuthPage.dart';
 import 'package:digitalpendal/screens/Create_page/CreatePage.dart';
 import 'package:digitalpendal/screens/ProfilePage/ProfilePage.dart';
-import 'package:digitalpendal/screens/ProfilePage/ProfilePage.dart';
-import 'package:digitalpendal/screens/ProfilePage/ProfilePage.dart';
 import 'package:digitalpendal/screens/TimelinePage/TaskPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

@@ -12,7 +12,7 @@ import 'RegistrationPage.dart';
 
 class AuthPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _AuthPageState createState() => _AuthPageState();
 }
 class _LoginPageState extends State<AuthPage> {
   final GlobalKey<FormState> _key = GlobalKey();
@@ -40,7 +40,7 @@ class _LoginPageState extends State<AuthPage> {
         Container(
             padding: EdgeInsets.all(15),
             child: Column(
-                children: <Widget>[_formUI(), _socialSignIn()]))
+                children: <Widget>[_formUI(), _socialSignIn(),]))
       ]);
   @override
   void dispose() {
