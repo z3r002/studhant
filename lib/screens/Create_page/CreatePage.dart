@@ -23,7 +23,7 @@ class _CreatePageState extends State<CreatePage> {
 
   final _sizeTextBlack = const TextStyle(fontSize: 20.0, color: Colors.black);
   final _sizeTextWhite = const TextStyle(fontSize: 20.0, color: Colors.white);
-  final  storage = FlutterSecureStorage();
+  final storage = FlutterSecureStorage();
 
   EdgeInsets pad = EdgeInsets.only(top: 20.0);
 
@@ -31,6 +31,8 @@ class _CreatePageState extends State<CreatePage> {
   void initState() {
     super.initState();
     checkLoginStatus();
+    pickedDate = DateTime.now();
+    time = TimeOfDay.now();
   }
 
   checkLoginStatus() async {
@@ -40,10 +42,12 @@ class _CreatePageState extends State<CreatePage> {
           MaterialPageRoute(builder: (BuildContext context) => AuthPage()),
           (Route<dynamic> route) => false);
     }
-    print('THIS FUCKING TOKEN ' +value);
+    print('THIS FUCKING TOKEN ' + value);
   }
 
   BuildContext _context;
+  DateTime pickedDate;
+  TimeOfDay time;
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +56,25 @@ class _CreatePageState extends State<CreatePage> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           resizeToAvoidBottomPadding: false,
-          body:  Center(
+          body: Center(
             child: SingleChildScrollView(
               child: Form(
                   key: formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                       Padding(
-                           padding: pad),
-                       Container(
+                      Padding(padding: pad),
+                      ListTile(
+                        title: Text(
+                            '${pickedDate.year}.${pickedDate.month}.${pickedDate.day}'),
+                        onTap: _pickDate,
+                      ),
+                      ListTile(
+                        title: Text(
+                            '${time.hour}:${time.minute}'),
+                        onTap: _pickTime,
+                      ),
+                      Container(
                         child: TextFormField(
                           decoration: InputDecoration(
                             labelText: "Название работы",
@@ -80,7 +93,7 @@ class _CreatePageState extends State<CreatePage> {
                         ),
                         width: 340.0,
                         height: 50,
-                        margin:  pad,
+                        margin: pad,
                       ),
                       Container(
                         child: TextFormField(
@@ -123,7 +136,7 @@ class _CreatePageState extends State<CreatePage> {
                         height: 50,
                         margin: EdgeInsets.only(top: 20.0),
                       ),
-                       Container(
+                      Container(
                         child: TextFormField(
                           decoration: InputDecoration(
                             labelText: "Срок исполнения",
@@ -181,6 +194,31 @@ class _CreatePageState extends State<CreatePage> {
             ),
           ),
         ));
+  }
+
+  _pickDate() async {
+    DateTime date = await showDatePicker(
+        context: context,
+        initialDate: pickedDate,
+        firstDate: DateTime(DateTime.now().year - 5),
+        lastDate: DateTime(DateTime.now().year + 5));
+
+    if(date != null){
+      setState(() {
+        pickedDate = date;
+      });
+    }
+  }
+  _pickTime() async {
+    TimeOfDay t = await showTimePicker(
+        context: context,
+        initialTime: time,);
+
+    if( t != null){
+      setState(() {
+        time = t;
+      });
+    }
   }
 
   void submit() {
