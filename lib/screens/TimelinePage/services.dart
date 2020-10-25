@@ -7,7 +7,7 @@ class Services {
 
   static Future<List<Album>> getPhotos() async {
     try {
-      http.Response response = await http.get(Uri.encodeFull(url + '/Data.php'));
+      http.Response response = await http.get(Uri.encodeFull(url + '/tasks.php'));
       if (response.statusCode == 200) {
         List<Album> list = parsePhotos(response.body);
         return list;

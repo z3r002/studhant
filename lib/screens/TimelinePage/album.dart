@@ -1,9 +1,9 @@
 class Album {
   int id;
   String name;
-  String count_people;
+  int count_people;
  // String find;
-  String cost;
+  int cost;
   String description;
   String execute_period;
 
@@ -13,9 +13,9 @@ class Album {
     return Album(
       id: json['id'] as int,
       name: json['name'] as String,
-      count_people: json['count_people'] as String,
+      count_people: json['count_people'] as int,
      // find: json['find'] as String,
-      cost: json['cost'] as String,
+      cost: json['cost'] as int,
       description: json['description'] as String,
       execute_period: json['execute_period'] as String,
     );

@@ -64,16 +64,7 @@ class _CreatePageState extends State<CreatePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Padding(padding: pad),
-                      ListTile(
-                        title: Text(
-                            '${pickedDate.year}.${pickedDate.month}.${pickedDate.day}'),
-                        onTap: _pickDate,
-                      ),
-                      ListTile(
-                        title: Text(
-                            '${time.hour}:${time.minute}'),
-                        onTap: _pickTime,
-                      ),
+
                       Container(
                         child: TextFormField(
                           decoration: InputDecoration(
@@ -137,26 +128,48 @@ class _CreatePageState extends State<CreatePage> {
                         margin: EdgeInsets.only(top: 20.0),
                       ),
                       Container(
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            labelText: "Срок исполнения",
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                              borderSide: BorderSide(),
+                        padding: EdgeInsets.all(15),
+                        child:  Row(
+                          children: <Widget>[
+
+                            InkWell(
+                                child: Text(
+                                    'Дата: ${pickedDate.year}.${pickedDate.month}.${pickedDate.day}'),
+                                onTap: _pickDate
                             ),
-                            //fillColor: Colors.green
-                          ),
-                          maxLines: 1,
-                          validator: (val) =>
-                              val.length < 0 ? 'Введите срок выполнения' : null,
-                          onSaved: (val) => _executePeriod = val,
-                          style: _sizeTextBlack,
+                            Spacer(),
+                            InkWell(
+                              child: Text(
+                                'Время: ${time.hour}:${time.minute}',),
+                              onTap: _pickTime,
+                            ),
+                          ],
                         ),
-                        width: 340.0,
-                        height: 50,
-                        margin: pad,
                       ),
+
+
+
+                      // Container(
+                      //   child: TextFormField(
+                      //     decoration: InputDecoration(
+                      //       labelText: "Срок исполнения",
+                      //       fillColor: Colors.white,
+                      //       border: OutlineInputBorder(
+                      //         borderRadius: BorderRadius.circular(25.0),
+                      //         borderSide: BorderSide(),
+                      //       ),
+                      //       //fillColor: Colors.green
+                      //     ),
+                      //     maxLines: 1,
+                      //     validator: (val) =>
+                      //         val.length < 0 ? 'Введите срок выполнения' : null,
+                      //     onSaved: (val) => _executePeriod = val,
+                      //     style: _sizeTextBlack,
+                      //   ),
+                      //   width: 340.0,
+                      //   height: 50,
+                      //   margin: pad,
+                      // ),
                       Container(
                         child: TextFormField(
                           decoration: InputDecoration(
@@ -166,7 +179,6 @@ class _CreatePageState extends State<CreatePage> {
                               borderRadius: BorderRadius.circular(25.0),
                               borderSide: BorderSide(),
                             ),
-                            //fillColor: Colors.green
                           ),
                           maxLines: 1,
                           validator: (val) =>
@@ -231,16 +243,18 @@ class _CreatePageState extends State<CreatePage> {
 
   void performLogin(form) async {
     hideKeyboard();
+    String _dateTime = '${pickedDate.year}.${pickedDate.month}.${pickedDate.day}/${time.hour}:${time.minute}';
+    print(_dateTime);
 
     http.Response response = await http.post(
-        Uri.encodeFull(url + '/Data.php'),
+        Uri.encodeFull(url + '/tasks.php'),
         body: {
           'name': _name,
           'token': value,
           'description': _description,
           'count_people': _countPeople,
           'cost': _cost,
-          'execute_period': _executePeriod
+          'execute_period': _dateTime
         });
     print(response.statusCode);
     if (response.statusCode == 201) {

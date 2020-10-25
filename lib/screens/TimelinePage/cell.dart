@@ -57,14 +57,14 @@ class AlbumCell extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Text(
-                    album.cost + " р.",
+                    "${album.cost}  р.",
                     maxLines: 1,
                     softWrap: false,
                     style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800),
                   ),
                   Spacer(),
                   Text(
-                    "Найдено: " + '0' + "/" + album.count_people,
+                    "Найдено: " + '0' + "/ ${album.count_people}" ,
                     softWrap: false,
                     style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
                   )

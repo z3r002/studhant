@@ -1,9 +1,9 @@
+import 'package:digitalpendal/screens/ProfilePage/ProfilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../constants.dart';
 import 'album.dart';
 import 'package:http/http.dart' as http;
-
 
 class Details extends StatefulWidget {
   Details({@required this.curAlbum});
@@ -15,8 +15,8 @@ class Details extends StatefulWidget {
 }
 
 class GridDetailsState extends State<Details> {
-  final  storage = FlutterSecureStorage();
-
+  final storage = FlutterSecureStorage();
+  String value;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,6 @@ class GridDetailsState extends State<Details> {
                 child: Image.asset(
                   'images/noimage-md.png',
                 ),
-
               ),
               Row(
                 children: <Widget>[
@@ -57,7 +56,7 @@ class GridDetailsState extends State<Details> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
                     child: Text(
-                      widget.curAlbum.cost + " р.",
+                      "${widget.curAlbum.cost} р.",
                       maxLines: 2,
                       style: TextStyle(
                         fontSize: 18.0,
@@ -71,8 +70,7 @@ class GridDetailsState extends State<Details> {
                     child: Text(
                       "Найдено: " +
                           // widget.curAlbum.find +
-                          "/" +
-                          widget.curAlbum.count_people,
+                          "/ ${widget.curAlbum.count_people}",
                       maxLines: 2,
                       style: TextStyle(
                         fontSize: 18.0,
@@ -124,7 +122,19 @@ class GridDetailsState extends State<Details> {
       ),
     );
   }
-  accept(){
 
+  accept() async {
+    value = await storage.read(key: 'token');
+    http.Response response =
+        await http.post(Uri.encodeFull(url + '/tasks.php'), body: {
+      'id': '${widget.curAlbum.id}',
+      'token': value,
+    });
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      print('task is accept');
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => Profile()));
+    }
   }
 }
